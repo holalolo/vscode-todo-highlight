@@ -1,5 +1,4 @@
-VSCODE-TODO-HIGHLIGHT
-===
+# VSCODE-TODO-HIGHLIGHT
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/wayou/vscode-todo-highlight.svg?branch=master)](https://travis-ci.org/wayou/vscode-todo-highlight) [![Version](https://vsmarketplacebadge.apphb.com/version-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight) [![Installs](https://vsmarketplacebadge.apphb.com/installs-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight) [![Ratings](https://vsmarketplacebadge.apphb.com/rating-short/wayou.vscode-todo-highlight.svg)](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight)
 
@@ -10,37 +9,66 @@ So I've been wanting an extension for a long time that highlights them and remin
 
 Hope this extension helps you as well.
 
-*NOTICE*
+## Quick Start
+
+1. Install the extension from VS Code Marketplace
+2. Open any supported file (JS, TS, Python, Go, etc.)
+3. Add a TODO comment: `// TODO: your task here`
+4. The comment will be automatically highlighted
+5. Use the status bar icon or command palette to list all TODOs
+
+## Supported File Types
+
+The extension supports highlighting in these file types by default:
+
+- JavaScript/TypeScript (`.js`, `.jsx`, `.ts`, `.tsx`)
+- Python (`.py`)
+- Jupyter Notebooks (`.ipynb`)
+- Go (`.go`)
+- Java (`.java`)
+- HTML (`.html`)
+- PHP (`.php`)
+- CSS/SCSS (`.css`, `.scss`)
+
+You can customize which file types to include using the `todohighlight.include` setting.
+
+_NOTICE_
 
 Many report that the `List highlighted annotations` command is not working, make sure you have the file types included via `todohighlight.include`.
-
 
 ### Preview
 
 - with `material night` color theme:
-![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/material-night.png)
+  ![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/material-night.png)
 
 - with `material night eighties` color theme:
-![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/material-night-eighties.png)
+  ![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/material-night-eighties.png)
 
 ### Config
 
-`TODO:`,`FIXME:` are built-in keywords. You can override the look by customizing the setting.
+`TODO:`, `FIXME:`, `DEBUG:`, `NOTE:`, and `REVIEW:` are built-in keywords. You can override the look by customizing the setting.
+
+Each keyword has its own default styling:
+
+- `TODO:` - Yellow background
+- `FIXME:` - Pink background
+- `DEBUG:` - Blue background
+- `NOTE:` - Green background
+- `REVIEW:` - Purple background
 
 To customize the keywords and other stuff, <kbd>command</kbd> + <kbd>,</kbd> (Windows / Linux: File -> Preferences -> User Settings) open the vscode file `settings.json`.
 
-| | type | default | description |
-|---|---|---|---|
-| todohighlight.isEnable | boolean | true | Toggle the highlight, default is true. |
-| todohighlight.isCaseSensitive  | boolean | true | Whether the keywords are case sensitive or not. |
-| todohighlight.keywords | array | N/A | An array of keywords that will be hilighted. You can also specify the style for each keywords here. See example below for more infomation. |
-| todohighlight.keywordsPattern  | string | N/A | Specify keywords via RegExp instead of `todohighlight.keywords` one by one. NOTE that if this presents, `todohighlight.keywords` will be ignored. And REMEMBER to escapse the back slash if there's any in your regexp (using \\ instead of signle back slash). |
-| todohighlight.defaultStyle | object | N/A | Specify the default style for custom keywords, if not specified, build in default style will be applied. [See all available properties on VSCode doc DecorationRenderOptions section](https://code.visualstudio.com/api/references/vscode-api#DecorationRenderOptions) |
-| todohighlight.include | array | [<br>`"**/*.js"`,<br>`"**/*.jsx"`,<br>`"**/*.ts"`,<br>`"**/*.tsx",`<br>`"**/*.html"`,<br>`"**/*.php"`,<br>`"**/*.css",`<br>`"**/*.scss"`<br>] | Glob patterns that defines the files to search for. Only include files you need, DO NOT USE `{**/*.*}` for both permormance and avoiding binary files reason. <br> For backwards compatability, a string combine all the patterns is also valid `"{**/*.js,**/*.jsx,**/*.ts,**/*.tsx,**/*.html,**/*.php,**/*.css,**/*.scss}"` |
-| todohighlight.exclude | array | [<br>`"**/node_modules/**"`,<br>`"**/dist/**",`<br>`"**/bower_components/**"`,<br>`"**/build/**",`<br>`"**/.vscode/**"`,<br>`"**/.github/**"`,<br>`"**/_output/**"`,<br>`"**/*.min.*"`,<br>`"**/*.map"`<br>] | Glob pattern that defines files and folders to exclude while listing annotations. <br> For backwards compatability, a string combine all the patterns is also valid `"{**/node_modules/**,**/bower_components/**,**/dist/**,**/build/**,**/.vscode/**,**/_output/**,**/*.min.*,**/*.map}"` |
-| todohighlight.maxFilesForSearch | number | 5120 | Max files for searching, mostly you don't need to configure this. |
-| todohighlight.toggleURI | boolean | false | If the file path within the output channel not clickable, set this to true to toggle the path patten between `<path>#<line>` and `<path>:<line>:<column>`. |
-
+|                                 | type    | default                                                                                                                                                                                                      | description                                                                                                                                                                                                                                                                                                                   |
+| ------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| todohighlight.isEnable          | boolean | true                                                                                                                                                                                                         | Toggle the highlight, default is true.                                                                                                                                                                                                                                                                                        |
+| todohighlight.isCaseSensitive   | boolean | true                                                                                                                                                                                                         | Whether the keywords are case sensitive or not.                                                                                                                                                                                                                                                                               |
+| todohighlight.keywords          | array   | N/A                                                                                                                                                                                                          | An array of keywords that will be highlighted. You can also specify the style for each keywords here. See example below for more information.                                                                                                                                                                                 |
+| todohighlight.keywordsPattern   | string  | N/A                                                                                                                                                                                                          | Specify keywords via RegExp instead of `todohighlight.keywords` one by one. NOTE that if this presents, `todohighlight.keywords` will be ignored. And REMEMBER to escape the back slash if there's any in your regexp (using \\ instead of single back slash).                                                                |
+| todohighlight.defaultStyle      | object  | N/A                                                                                                                                                                                                          | Specify the default style for custom keywords, if not specified, build in default style will be applied. [See all available properties on VSCode doc DecorationRenderOptions section](https://code.visualstudio.com/api/references/vscode-api#DecorationRenderOptions)                                                        |
+| todohighlight.include           | array   | [<br>`"**/*.js"`,<br>`"**/*.jsx"`,<br>`"**/*.ts"`,<br>`"**/*.tsx",`<br>`"**/*.html"`,<br>`"**/*.php"`,<br>`"**/*.css",`<br>`"**/*.scss"`<br>]                                                                | Glob patterns that defines the files to search for. Only include files you need, DO NOT USE `{**/*.*}` for both performance and avoiding binary files reason. <br> For backwards compatibility, a string combine all the patterns is also valid `"{**/*.js,**/*.jsx,**/*.ts,**/*.tsx,**/*.html,**/*.php,**/*.css,**/*.scss}"` |
+| todohighlight.exclude           | array   | [<br>`"**/node_modules/**"`,<br>`"**/dist/**",`<br>`"**/bower_components/**"`,<br>`"**/build/**",`<br>`"**/.vscode/**"`,<br>`"**/.github/**"`,<br>`"**/_output/**"`,<br>`"**/*.min.*"`,<br>`"**/*.map"`<br>] | Glob pattern that defines files and folders to exclude while listing annotations. <br> For backwards compatibility, a string combine all the patterns is also valid `"{**/node_modules/**,**/bower_components/**,**/dist/**,**/build/**,**/.vscode/**,**/_output/**,**/*.min.*,**/*.map}"`                                    |
+| todohighlight.maxFilesForSearch | number  | 5120                                                                                                                                                                                                         | Max files for searching, mostly you don't need to configure this.                                                                                                                                                                                                                                                             |
+| todohighlight.toggleURI         | boolean | false                                                                                                                                                                                                        | If the file path within the output channel not clickable, set this to true to toggle the path patten between `<path>#<line>` and `<path>:<line>:<column>`.                                                                                                                                                                    |
 
 an example of customizing configuration:
 
@@ -68,7 +96,7 @@ an example of customizing configuration:
             "border": "1px solid red",
             "borderRadius": "2px", //NOTE: using borderRadius along with `border` or you will see nothing change
             "backgroundColor": "rgba(0,0,0,.2)",
-            //other styling properties goes here ... 
+            //other styling properties goes here ...
         }
     ],
     "todohighlight.keywordsPattern": "TODO:|FIXME:|\\(([^)]+)\\)", //highlight `TODO:`,`FIXME:` or content between parentheses
@@ -80,7 +108,7 @@ an example of customizing configuration:
         "border": "1px solid #eee",
         "borderRadius": "2px",
         "isWholeLine": true,
-        //other styling properties goes here ... 
+        //other styling properties goes here ...
     },
     "todohighlight.include": [
         "**/*.js",
@@ -114,16 +142,14 @@ an example of customizing configuration:
 This extension contributes the following commands to the Command palette.
 
 - `Toggle highlight` : turn on/off the highlight
-![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/toggle-highlight.gif)
+  ![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/toggle-highlight.gif)
 - `List highlighted annotations` : list annotations and reveal from corresponding file
-![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/list-annotations.gif)
+  ![](https://github.com/wayou/vscode-todo-highlight/raw/master/assets/list-annotations.gif)
 
+### Known Issues
 
-### Known issue
+The clickable file pattern within the output channel differs from OS platform(`<path>#<line>` for Mac/Windows and `<path>:<line>:<column>` for Linux, for details see this [issue](https://github.com/Microsoft/vscode/issues/586) ).
 
- The clickable file pattern within the output channel differs from OS platform(`<path>#<line>` for Mac/Windows and `<path>:<line>:<column>` for Linux, for details see this [issue](https://github.com/Microsoft/vscode/issues/586) ). 
+Basically the extension auto detects the OS platform.
 
- Basically the extension auto detects the OS platform.
-
- If you find that the file path is not clickable, set `todohighlight.toggleURI` to `true` to toggle the file pattern.
-  
+If you find that the file path is not clickable, set `todohighlight.toggleURI` to `true` to toggle the file pattern.
