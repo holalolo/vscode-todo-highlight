@@ -20,6 +20,20 @@ var DEFAULT_KEYWORDS = {
     backgroundColor: "#f06292",
     overviewRulerColor: "rgba(240,98,146,0.8)",
   },
+  "À FAIRE:": {
+    // French
+    text: "À FAIRE:",
+    color: "#fff",
+    backgroundColor: "#ffbd2a", // Same as TODO
+    overviewRulerColor: "rgba(255,189,42,0.8)",
+  },
+  "POR HACER:": {
+    // Spanish
+    text: "POR HACER:",
+    color: "#fff",
+    backgroundColor: "#ffbd2a", // Same as TODO
+    overviewRulerColor: "rgba(255,189,42,0.8)",
+  },
   "DEBUG:": {
     text: "DEBUG:",
     color: "#fff",
@@ -56,7 +70,7 @@ function getAssembledData(keywords, customDefaultStyle, isCaseSensitive) {
       text = text.toUpperCase();
     }
 
-    if (text == "TODO:" || text == "FIXME:") {
+    if (text == "TODO:" || text == "FIXME:" ||text == "À FAIRE:" || text == "POR HACER:" ) {
       v = Object.assign({}, DEFAULT_KEYWORDS[text], v);
     }
     result[text] = Object.assign({}, DEFAULT_STYLE, customDefaultStyle, v);

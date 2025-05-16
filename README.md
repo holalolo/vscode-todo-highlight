@@ -46,6 +46,25 @@ Many report that the `List highlighted annotations` command is not working, make
 
 ### Config
 
+## 🌍 Multilingual Support (New!)
+
+The extension now highlights non-English keywords with the same styles as their English equivalents:
+
+| Keyword      | Language | Example                   |
+| ------------ | -------- | ------------------------- |
+| `À FAIRE:`   | French   | `À FAIRE: Corriger ceci`  |
+| `POR HACER:` | Spanish  | `POR HACER: Revisar esto` |
+
+**To customize**: Add your own keywords in settings:
+
+````json
+"todohighlight.keywords": [
+  "TODO:",
+  "FIXME:",
+  "À FAIRE:",
+  "POR HACER:"
+]
+
 `TODO:`, `FIXME:`, `DEBUG:`, `NOTE:`, and `REVIEW:` are built-in keywords. You can override the look by customizing the setting.
 
 Each keyword has its own default styling:
@@ -135,7 +154,7 @@ an example of customizing configuration:
     "todohighlight.maxFilesForSearch": 5120,
     "todohighlight.toggleURI": false
 }
-```
+````
 
 ### Commands
 
